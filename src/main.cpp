@@ -35,7 +35,7 @@ double targetTemp;          // target temperature
 double currentTemp;         // current temperature
 
 int func = 0;               // state of program
-static int timeOut = 180; // time out for saftey - if temp does not reach target value within this time, errors out
+static int timeOut = 180; // time out for safety - if temp does not reach target value within this time, errors out
 
 // VARIABLES //
 unsigned long millis_before, millis_before_2;    //Loop refresh rate
@@ -88,11 +88,9 @@ float PID_Calc(float temp_setpoint, float temperature) {
 
   PREV_ERROR = PID_ERROR;
 
-  constrain(PID_Output, 0, 255);
-
   pwm_value = floor(constrain(PID_Output, 0, 255));
 
-  return floor(pwm_value);
+  return (pwm_value);
 
 }
 
@@ -197,7 +195,7 @@ void plotTemp(float temp, String tempProfile, int target) {
 
 // SAFTY FUNCTION
 
-void saftey(int currentT, float target) {
+void safety(int currentT, float target) {
  
   if ((millis_now - lastTempChangeTime) / 1000 >= timeOut) {
     if (currentT != target) {
@@ -214,7 +212,7 @@ void saftey(int currentT, float target) {
     }
 
     else {
-      Serial.println("saftey");
+      Serial.println("safety");
 
       lastTempChangeTime = millis_now;
     }
@@ -279,7 +277,7 @@ void loop() {
 
       break;
 
-    case 1:  // case for saok temp
+    case 1:  // case for soak temp
 
       rotory();
       display.setCursor(0, 0);
@@ -330,7 +328,7 @@ void loop() {
 
       millis_now = millis();
 
-      saftey(currentTemp, preheat);
+      safety(currentTemp, preheat);
 
 
       pwm_value = PID_Calc(preheat, currentTemp);
@@ -369,7 +367,7 @@ void loop() {
 
       millis_now = millis();
 
-      saftey(currentTemp, soak);
+      safety(currentTemp, soak);
 
       pwm_value = PID_Calc(soak, currentTemp);
       analogWrite(SSR, pwm_value);
@@ -403,7 +401,7 @@ void loop() {
 
       millis_now = millis();
 
-      saftey(currentTemp, reflow);
+      safety(currentTemp, reflow);
       pwm_value = PID_Calc(reflow, currentTemp);
       analogWrite(SSR, pwm_value);
 
