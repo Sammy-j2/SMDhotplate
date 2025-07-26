@@ -15,7 +15,11 @@ Power Plug: https://www.amazon.com/dp/B09LGX9MQX?ref_=ppx_hzsearch_conn_dt_b_fed
 
 Hot Plate: https://www.amazon.com/dp/B07W1ZZH8T?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_4
 
-Thermistor: https://www.amazon.com/dp/B0714MR5BC?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2 (Use a xxxx resistor)
+Thermistor: https://www.amazon.com/dp/B0714MR5BC?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2 (Use a 4.7k resistor)
 
 Arduino Pro Micro: https://www.amazon.com/dp/B09KGY2NWT?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_14
+
+I want to thank Electronoobs for his youtube breakdown and his write up on building a reflow plate. Please check out his work
+https://electronoobs.com/index.php
+https://www.youtube.com/@ELECTRONOOBS
 
