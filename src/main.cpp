@@ -38,31 +38,31 @@ int func = 0;               // state of program
 static int timeOut = 180; // time out for saftey - if temp does not reach target value within this time, errors out
 
 // VARIABLES //
-unsigned long millis_before, millis_before_2;    //We use these to create the loop refresh rate
+unsigned long millis_before, millis_before_2;    //Loop refresh rate
 unsigned long millis_now = 0;
 unsigned long millisGraph=0;
 unsigned long millisTimer=0;
 unsigned long lastTempChangeTime = 0;
 unsigned long millis_safe = 0;
 
-float refresh_rate = 500;                       //LCD refresh rate. You can change this if you want
+float refresh_rate = 500;                       //LCD refresh rate.
 float pid_refresh_rate  = 50;                   //PID Refresh rate
 float seconds = 0;                              //Variable used to store the elapsed time
 float temperature = 0;                          //Store the temperature value here
-float preheat;                                  //Mode 1 preheat ramp value is 140-150ºC
-float soak;                                     //Mode 1 soak is 150ºC for a few seconds
-float reflow;                                    //Mode 1 reflow peak is 200ºC
+float preheat;                                  //preheat value
+float soak;                                     //Soak value
+float reflow;                                   //Reflow Value
 float temp_setpoint = 0;                        //Used for PID control
 float pwm_value = 255;                          //The SSR is OFF with HIGH, so 255 PWM would turn OFF the SSR
 float MIN_PID_VALUE = 0;
-float MAX_PID_VALUE = 255;                      //Max PID value. You can change this.
-float coolDown = 40;                            //When is ok to touch the plate
+float MAX_PID_VALUE = 255;                      //Max PID value. 
+float coolDown = 40;                            //temperature to cool down to
 
 ///////////////////// PID VARIABLES ///////////////////////
 /////////////////////////////////////////////////////////
-float Kp = 50;               //Mine was 2
-float Ki = 0.00;          //Mine was 0.0025
-float Kd = 0;               //Mine was 9
+float Kp = 50;              // Gain value for the Proportional term - further you are from the setpoint, the more power is applied
+float Ki = 0.00;            // Error integral gain value for the Integral term - added to the output to eliminate steady state error
+float Kd = 0;               // Derivative gain value for the Derivative term - used to dampen the output and reduce overshoot
 float PID_Output = 0;
 float PID_P, PID_I, PID_D;
 float PID_ERROR, PREV_ERROR;
@@ -82,7 +82,7 @@ float PID_Calc(float temp_setpoint, float temperature) {
 
   PID_ERROR =  temp_setpoint - temperature;
   PID_P = Kp * PID_ERROR;
-  //  PID_I = PID_I + (Ki * PID_ERROR);
+  //  PID_I = PID_I + (Ki * PID_ERROR); // Integral term accumulates error over time - was couasing overshoot
   PID_D = Kd * (PID_ERROR - PREV_ERROR);
   PID_Output = PID_P + PID_I + PID_D;
 
@@ -106,7 +106,7 @@ void rotory() {
   if (interruptTime - lastInterruptTime > 5) {
     currentState = digitalRead(clk); // Reads the "current" state of the clk pin
     
-    //  // If the previous and the current state of the clk are different, that means a Pulse has occured
+      // If the previous and the current state of the clk are different, that means a Pulse has occured
     if (currentState != LastState && currentState == 0 ) {
       
       //    If the dt pin state is different to the clk state, that means the encoder is rotating clockwise
