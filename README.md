@@ -23,3 +23,6 @@ I want to thank Electronoobs for his youtube breakdown and his write up on build
 https://electronoobs.com/index.php
 https://www.youtube.com/@ELECTRONOOBS
 
+NOTE: IF YOU DO NOT KNOW WHAT YOU ARE DOING WITH MAINS VOLTAGE DO NOT ATTEMPT!!!!
+THIS USES A HOT PLATE THAT RUNS OFF AC VOLTAGE AND DEALS WITH HEATING ELEMENTS - USE AT YOUR OWN RISK AND DO NOT ATTEMPT IF YOU DO NOT KNOW WHAT YOU ARE DOING!
+
